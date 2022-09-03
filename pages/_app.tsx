@@ -1,14 +1,24 @@
 import { AppProps } from "next/app";
-import { Layout } from "@components/common";
-import "../styles/globals.css";
+import { FC } from "react";
 
-function MyApp({ Component, pageProps }: AppProps) {
+import "@assets/main.css";
+
+const Noop: FC<CompProps> = ({ children }) => <>{children}</>;
+
+type CompProps = {
+  children: React.ReactNode;
+};
+
+function MyApp({
+  Component,
+  pageProps,
+}: AppProps & { Component: { Layout: FC<CompProps> } }) {
+  const Layout = Component.Layout ?? Noop;
+
   return (
-    <>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </>
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
   );
 }
 
