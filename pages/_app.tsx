@@ -1,5 +1,6 @@
 import { AppProps } from "next/app";
 import { FC } from "react";
+import UIProvider, {useUI} from "@components/ui/context";
 
 import "@assets/main.css";
 
@@ -16,9 +17,11 @@ function MyApp({
   const Layout = Component.Layout ?? Noop;
 
   return (
+    <UIProvider>
     <Layout>
       <Component {...pageProps} />
     </Layout>
+    </UIProvider>
   );
 }
 
